@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ar puro, vida longa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --sky-1: #4fb0e8;
+            --sky-2: #bce6f8;
+            --haze: #8fb2c6;
+            --brick: #a23d2c;
+            --brick-dark: #7c2e22;
+            --sand: #b88a52;
+            --leaf: #45a25a;
+            --leaf-deep: #2b6a39;
+            --leaf-soft: #cfe9c4;
+            --asphalt: #2a2630;
+            --asphalt-2: #3f3947;
+            --ink: #1b1722;
+            --ink-soft: #5c5663;
+            --paper: #f5f2ec;
+            --paper-2: #eae3d7;
+            --card: #fff;
+            --accent: #e8632e;
+            --shadow: 0 18px 44px rgba(20, 18, 28, .18);
+            --shadow-sm: 0 8px 20px rgba(20, 18, 28, .12);
+            --r: 20px;
+            --game-aspect: 16/9;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Nunito", system-ui, sans-serif;
+            color: var(--ink);
+            background: var(--paper);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        .font-display {
+            font-family: "Fredoka", system-ui, sans-serif;
+            font-weight: 600;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        ::selection {
+            background: var(--leaf-soft);
+        }
+
+        /* Header */
+        .site-head {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px clamp(16px, 4vw, 46px);
+            background: rgba(245, 242, 236, .85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(27, 23, 34, .07);
+        }
+
+        .brand {
+            font-family: "Fredoka";
+            font-weight: 600;
+            font-size: 1.22rem;
+            text-decoration: none;
+            letter-spacing: -.01em;
+        }
+
+        .brand span {
+            color: var(--ink-soft);
+            font-weight: 400;
+        }
+
+        .site-head nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .site-head nav a {
+            text-decoration: none;
+            font-weight: 700;
+            color: var(--ink-soft);
+            padding: 9px 14px;
+            border-radius: 999px;
+            font-size: .95rem;
+            transition: .15s;
+        }
+
+        .site-head nav a:hover {
+            color: var(--ink);
+            background: rgba(27, 23, 34, .05);
+        }
+
+        .nav-cta {
+            background: var(--leaf-deep) !important;
+            color: #fff !important;
+        }
+
+        .nav-cta:hover {
+            background: #1f4f2b !important;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5em;
+            font-family: "Fredoka";
+            font-weight: 500;
+            font-size: 1.05rem;
+            padding: 14px 26px;
+            border-radius: 999px;
+            border: 2px solid transparent;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform .12s, box-shadow .2s, background .2s;
+            user-select: none;
+        }
+
+        .btn:active {
+            transform: translateY(1px) scale(.99);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--leaf), var(--leaf-deep));
+            color: #fff;
+            box-shadow: 0 10px 24px rgba(43, 106, 57, .32);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 14px 30px rgba(43, 106, 57, .42);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, .7);
+            border-color: rgba(27, 23, 34, .14);
+            color: var(--ink);
+        }
+
+        .btn-ghost:hover {
+            background: #fff;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            padding: clamp(34px, 6vw, 60px) clamp(20px, 5vw, 60px) clamp(40px, 6vw, 70px);
+            background: linear-gradient(170deg, var(--sky-1) 0%, #7ec8ef 42%, var(--sky-2) 100%);
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: .05;
+            background-image: radial-gradient(#000 1px, transparent 1px);
+            background-size: 6px 6px;
+            pointer-events: none;
+        }
+
+        .hero-cloud {
+            position: absolute;
+            background: #fff;
+            border-radius: 50px;
+            opacity: .9;
+            pointer-events: none;
+        }
+
+        .hero-cloud::before,
+        .hero-cloud::after {
+            content: "";
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .hero-cloud.a {
+            width: 120px;
+            height: 30px;
+            top: 8%;
+            left: 12%;
+            animation: drift 30s linear infinite;
+        }
+
+        .hero-cloud.a::before {
+            width: 48px;
+            height: 48px;
+            top: -22px;
+            left: 18px;
+        }
+
+        .hero-cloud.a::after {
+            width: 34px;
+            height: 34px;
+            top: -12px;
+            left: 62px;
+        }
+
+        .hero-cloud.b {
+            width: 90px;
+            height: 24px;
+            top: 16%;
+            right: 14%;
+            opacity: .75;
+            animation: drift 40s linear infinite reverse;
+        }
+
+        .hero-cloud.b::before {
+            width: 36px;
+            height: 36px;
+            top: -15px;
+            left: 14px;
+        }
+
+        @keyframes drift {
+            from {
+                transform: translateX(-22px);
+            }
+
+            to {
+                transform: translateX(22px);
+            }
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto clamp(28px, 4vw, 40px);
+            color: #fff;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-weight: 800;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            font-size: .72rem;
+            background: rgba(255, 255, 255, .24);
+            backdrop-filter: blur(4px);
+            padding: 7px 14px;
+            border-radius: 999px;
+            margin: 0 0 18px;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.6rem, 7vw, 4.8rem);
+            line-height: .96;
+            margin: 0 0 16px;
+            letter-spacing: -.02em;
+            font-weight: 700;
+            text-shadow: 0 4px 16px rgba(20, 40, 60, .3);
+        }
+
+        .hero-text .lead {
+            font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+            line-height: 1.5;
+            max-width: 42ch;
+            margin: 0 auto 26px;
+            font-weight: 600;
+            text-shadow: 0 2px 8px rgba(20, 40, 60, .25);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Before / After comparator */
+        .ba-frame {
+            position: relative;
+            z-index: 2;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .ba {
+            position: relative;
+            border-radius: var(--r);
+            overflow: hidden;
+            box-shadow: 0 24px 50px rgba(20, 30, 45, .35);
+            border: 4px solid rgba(255, 255, 255, .85);
+            user-select: none;
+            touch-action: pan-y;
+            line-height: 0;
+            background: #222;
+        }
+
+        .ba img {
+            width: 100%;
+            height: auto;
+            pointer-events: none;
+            -webkit-user-drag: none;
+        }
+
+        .ba-after {
+            display: block;
+        }
+
+        .ba-before {
+            position: absolute;
+            inset: 0;
+            width: 50%;
+            overflow: hidden;
+        }
+
+        /* 
+        .ba-before img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: auto;
+            max-width: none;
+
+            transform: translateY(20px);
+        } */
+
+        .ba-before img {
+            position: absolute;
+            top: -20px;
+            left: 0;
+
+            height: calc(100% + 20px);
+            width: auto;
+            max-width: none;
+        }
+
+
+        .ba-divider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: #fff;
+            transform: translateX(-50%);
+            box-shadow: 0 0 12px rgba(0, 0, 0, .4);
+            pointer-events: none;
+        }
+
+        .ba-knob {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--ink-soft);
+            pointer-events: none;
+        }
+
+        .ba-range {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            opacity: 0;
+            cursor: ew-resize;
+        }
+
+        .ba-range:focus-visible+.ba-divider .ba-knob {
+            outline: 3px solid var(--leaf);
+        }
+
+        .ba-tag {
+            position: absolute;
+            bottom: 14px;
+            font-family: "Fredoka";
+            font-weight: 600;
+            font-size: .82rem;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 999px;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+            letter-spacing: .02em;
+        }
+
+        .ba-tag.l {
+            left: 14px;
+            background: rgba(124, 46, 34, .78);
+        }
+
+        .ba-tag.r {
+            right: 14px;
+            background: rgba(43, 106, 57, .8);
+        }
+
+        .ba-caption {
+            text-align: center;
+            color: #fff;
+            font-weight: 700;
+            margin-top: 14px;
+            font-size: .95rem;
+            opacity: .95;
+            text-shadow: 0 2px 6px rgba(20, 40, 60, .3);
+        }
+
+        .ba-caption .dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #fff;
+            margin: 0 8px;
+            vertical-align: middle;
+            opacity: .6;
+        }
+
+        /* Sections */
+        section {
+            padding: clamp(54px, 8vw, 100px) clamp(20px, 6vw, 80px);
+        }
+
+        .section-tag {
+            font-weight: 800;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            font-size: .74rem;
+            color: var(--leaf-deep);
+            margin: 0 0 10px;
+        }
+
+        h2.title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin: 0 0 14px;
+            letter-spacing: -.01em;
+        }
+
+        .section-intro {
+            color: var(--ink-soft);
+            font-size: 1.12rem;
+            max-width: 56ch;
+            line-height: 1.55;
+            margin: 0 0 44px;
+            font-weight: 600;
+        }
+
+        .how {
+            background: linear-gradient(180deg, #fff, var(--paper));
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .step {
+            background: var(--card);
+            border-radius: var(--r);
+            padding: 26px 24px 28px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(27, 23, 34, .05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step .num {
+            font-family: "Fredoka";
+            font-weight: 600;
+            font-size: .85rem;
+            color: var(--leaf);
+            letter-spacing: .05em;
+        }
+
+        .step .ico {
+            font-size: 2.6rem;
+            line-height: 1;
+            margin: 6px 0 14px;
+            display: block;
+        }
+
+        .step h3 {
+            margin: 0 0 8px;
+            font-size: 1.22rem;
+        }
+
+        .step p {
+            margin: 0;
+            color: var(--ink-soft);
+            line-height: 1.5;
+            font-weight: 600;
+        }
+
+        .step::after {
+            content: "";
+            position: absolute;
+            right: -26px;
+            bottom: -26px;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: var(--paper-2);
+            z-index: 0;
+        }
+
+        .step>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Play / Unity embed */
+        .play {
+            background: var(--paper-2);
+        }
+
+        .play-wrap {
+            max-width: 1040px;
+            margin: 0 auto;
+        }
+
+        .stage {
+            position: relative;
+            width: 100%;
+            aspect-ratio: var(--game-aspect);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: #15131a;
+            border: 1px solid rgba(27, 23, 34, .08);
+        }
+
+        .stage iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .stage .poster {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .stage .poster::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(20, 15, 22, .25), rgba(20, 15, 22, .78));
+        }
+
+        .poster-inner {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            text-align: center;
+            padding: 24px;
+            color: #fff;
+        }
+
+        .play-btn {
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--leaf), var(--leaf-deep));
+            color: #fff;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .4);
+            transition: transform .15s;
+            padding-left: 6px;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .poster-inner h3 {
+            font-size: clamp(1.3rem, 3.2vw, 1.9rem);
+            margin: 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, .5);
+        }
+
+        .poster-inner p {
+            margin: 0;
+            font-weight: 700;
+            opacity: .92;
+            max-width: 34ch;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, .5);
+        }
+
+        .badge-dev {
+            font-family: "Fredoka";
+            font-weight: 500;
+            font-size: .74rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            background: var(--accent);
+            color: #fff;
+            padding: 6px 13px;
+            border-radius: 999px;
+        }
+
+        .stage-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .stage-bar .hint {
+            color: var(--ink-soft);
+            font-weight: 700;
+            font-size: .92rem;
+        }
+
+        .btn-mini {
+            border: none;
+            background: #fff;
+            font-family: "Fredoka";
+            font-weight: 500;
+            font-size: .92rem;
+            padding: 11px 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            color: var(--ink);
+            box-shadow: var(--shadow-sm);
+            transition: .15s;
+            display: inline-flex;
+            gap: .4em;
+            align-items: center;
+        }
+
+        .btn-mini:hover {
+            transform: translateY(-2px);
+        }
+
+        details.dev {
+            margin-top: 26px;
+            background: #fff;
+            border-radius: 16px;
+            border: 1px dashed rgba(27, 23, 34, .18);
+            overflow: hidden;
+        }
+
+        details.dev summary {
+            cursor: pointer;
+            padding: 16px 20px;
+            font-family: "Fredoka";
+            font-weight: 500;
+            font-size: .98rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        details.dev summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.dev summary::before {
+            content: "🛠️";
+        }
+
+        details.dev[open] summary {
+            border-bottom: 1px dashed rgba(27, 23, 34, .14);
+        }
+
+        .dev-body {
+            padding: 6px 22px 22px;
+            color: var(--ink-soft);
+            font-weight: 600;
+            line-height: 1.6;
+            font-size: .95rem;
+        }
+
+        .dev-body ol {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        .dev-body li {
+            margin: 7px 0;
+        }
+
+        .dev-body code {
+            background: var(--paper-2);
+            padding: 2px 7px;
+            border-radius: 6px;
+            font-family: ui-monospace, Menlo, Consolas, monospace;
+            font-size: .86em;
+            color: var(--brick-dark);
+            font-weight: 700;
+        }
+
+        /* toast */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 28px;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--ink);
+            color: #fff;
+            padding: 14px 22px;
+            border-radius: 999px;
+            font-weight: 700;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .3);
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s;
+            z-index: 200;
+            font-size: .95rem;
+            max-width: 90vw;
+            text-align: center;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        footer {
+            background: var(--leaf-deep);
+            color: #dff0e3;
+            text-align: center;
+            padding: 40px 20px;
+            font-weight: 600;
+        }
+
+        footer b {
+            color: #fff;
+            font-family: "Fredoka";
+            font-weight: 500;
+        }
+
+        footer .small {
+            opacity: .7;
+            font-size: .85rem;
+            margin-top: 8px;
+        }
+
+        @media (max-width:640px) {
+            .site-head nav a:not(.nav-cta) {
+                display: none;
+            }
+
+            .ba-knob {
+                width: 40px;
+                height: 40px;
+            }
+
+            :root {
+                --game-aspect: 4/3;
+            }
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+            * {
+                animation-duration: .001s !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-head">
+        <a class="brand" href="#top">🌬️ Ar puro<span>, vida longa</span></a>
+        <nav>
+            <a href="#como">Como jogar</a>
+            <a class="nav-cta" href="#jogar">Jogar</a>
+        </nav>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section id="top" class="hero">
+        <div class="hero-cloud a"></div>
+        <div class="hero-cloud b"></div>
+
+        <div class="hero-text">
+            <p class="eyebrow">Jogo educativo · qualidade do ar</p>
+            <h1>Ar puro, vida longa</h1>
+            <p class="lead">Limpe a cidade: remova o que polui, traga de volta as árvores e veja a rua respirar de novo.
+            </p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="#jogar">▶ Jogar</a>
+                <a class="btn btn-ghost" href="#como">Como jogar</a>
+            </div>
+        </div>
+
+        <div class="ba-frame">
+            <div class="ba" id="ba">
+                <img class="ba-after" src="Clean.png"
+                    alt="A mesma rua limpa: árvores, céu azul e calçadas livres de lixo">
+                <div class="ba-before" id="baBefore">
+                    <img src="Polluted.png" alt="Uma rua poluída: fumaça, lixo nas calçadas e prédios degradados">
+                </div>
+                <div class="ba-divider" id="baDivider"><span class="ba-knob">⇄</span></div>
+                <input type="range" min="0" max="100" value="50" class="ba-range" id="baRange"
+                    aria-label="Arraste para comparar a cena poluída e a cena limpa">
+                <span class="ba-tag l">Poluída</span>
+                <span class="ba-tag r">Limpa</span>
+            </div>
+            <p class="ba-caption">Arraste <span class="dot"></span> de poluído a ar puro <span class="dot"></span> é
+                isso que você faz no jogo</p>
+        </div>
+    </section>
+
+    <!-- ===== COMO JOGAR ===== -->
+    <section id="como" class="how">
+        <p class="section-tag">As regras</p>
+        <h2 class="title">Como jogar</h2>
+        <p class="section-intro">A meta é deixar a qualidade do ar em 100% em cada cenário. Você consegue isso fazendo
+            duas coisas: tirando o que polui e colocando o que ajuda.</p>
+        <div class="steps">
+            <div class="step">
+                <span class="num">PASSO 01</span>
+                <span class="ico">👀</span>
+                <h3>Leia a cena</h3>
+                <p>Cada fase mostra uma rua com várias fontes de poluição: carros, ônibus velho, fumaça e lixo.</p>
+            </div>
+            <div class="step">
+                <span class="num">PASSO 02</span>
+                <span class="ico">🫳</span>
+                <h3>Remova a poluição</h3>
+                <p>Arraste cada fonte de poluição para fora da cena para limpar o ar daquele ponto.</p>
+            </div>
+            <div class="step">
+                <span class="num">PASSO 03</span>
+                <span class="ico">🌳</span>
+                <h3>Aplique soluções</h3>
+                <p>Solte as soluções na rua — árvores, transporte limpo, energia renovável — onde fazem mais efeito.</p>
+            </div>
+            <div class="step">
+                <span class="num">PASSO 04</span>
+                <span class="ico">💙</span>
+                <h3>Devolva o céu azul</h3>
+                <p>A cada acerto o ar melhora. Chegue a 100% e a rua poluída vira a rua limpa. Ar puro, vida longa!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== JOGAR (Unity WebGL) ===== -->
+    <section id="jogar" class="play">
+        <p class="section-tag">Mão na massa</p>
+        <h2 class="title">Jogue agora</h2>
+        <p class="section-intro">O jogo roda direto aqui no navegador. Toque em jogar para começar a limpar a cidade.
+        </p>
+
+        <div class="play-wrap">
+            <div class="stage" id="stage">
+                <div class="poster" id="poster" style="background-image:url('__IMG_POLLUTED__')">
+                    <div class="poster-inner">
+                        <span class="badge-dev">🚧 Em desenvolvimento</span>
+                        <button class="play-btn" id="playBtn" aria-label="Jogar">▶</button>
+                        <h3>Ar puro, vida longa</h3>
+                        <p id="posterMsg">O jogo está sendo finalizado. Em breve, jogável aqui mesmo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stage-bar">
+                <span class="hint">Melhor experiência em tela cheia 🖥️</span>
+                <button class="btn-mini" id="fsBtn">⛶ Tela cheia</button>
+            </div>
+
+            <details class="dev">
+                <summary>Para o desenvolvedor — conectar o build da Unity</summary>
+                <div class="dev-body">
+                    Quando o build WebGL estiver publicado, é só plugar a URL e o jogo aparece aqui.
+                    <ol>
+                        <li>Na Unity: <code>File ▸ Build Settings ▸ WebGL ▸ Build</code>.</li>
+                        <li>Publique a pasta gerada num host estático — <code>itch.io</code> é o caminho mais fácil para
+                            jogos (já cuida da compressão); <code>GitHub Pages</code>, <code>Netlify</code> ou
+                            <code>Vercel</code> também servem.
+                        </li>
+                        <li>Copie a URL pública do jogo (o endereço do <code>index.html</code> do build).</li>
+                        <li>Abra este arquivo e cole a URL na linha <code>const GAME_URL = ""</code>, no início do
+                            script lá embaixo.</li>
+                    </ol>
+                    Enquanto <code>GAME_URL</code> estiver vazio, esta área mostra o aviso de "em desenvolvimento".
+                    Assim que houver uma URL, o botão de play carrega o jogo num iframe. WebGL precisa ser servido por
+                    <code>http(s)</code> — abrir como arquivo local não funciona.
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <footer>
+        <b>🌬️ Ar puro, vida longa</b><br>
+        Pequenas escolhas de cada dia deixam o ar — e a gente — respirando melhor.
+        <div class="small">Jogue, aprenda e compartilhe.</div>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        (function () {
+            "use strict";
+
+            /* =========================================================
+               COLE AQUI a URL do build WebGL da Unity (ex.: do itch.io).
+               Deixe "" enquanto o jogo ainda não estiver publicado.
+               ========================================================= */
+            const GAME_URL = "";
+
+            const $ = id => document.getElementById(id);
+
+            /* ---- Comparador antes/depois ---- */
+            const range = $("baRange"), before = $("baBefore"), divider = $("baDivider"), ba = $("ba");
+            function setSplit(v) {
+                const p = Math.max(0, Math.min(100, v));
+                before.style.width = p + "%";
+                divider.style.left = p + "%";
+                const img = before.querySelector("img");
+                if (img && ba.clientWidth) img.style.width = ba.clientWidth + "px";
+            }
+            range.addEventListener("input", () => setSplit(range.value));
+            window.addEventListener("resize", () => setSplit(range.value));
+            window.addEventListener("load", () => setSplit(range.value));
+            setSplit(50);
+
+            /* ---- Carregar o jogo (iframe Unity) ---- */
+            const stage = $("stage"), poster = $("poster"), posterMsg = $("posterMsg");
+            function launchGame() {
+                if (!GAME_URL) {
+                    toast("O jogo ainda está em desenvolvimento — volte em breve! 🚧");
+                    return;
+                }
+                const f = document.createElement("iframe");
+                f.src = GAME_URL;
+                f.title = "Ar puro, vida longa";
+                f.setAttribute("allow", "autoplay; fullscreen; gamepad; xr-spatial-tracking");
+                f.setAttribute("allowfullscreen", "");
+                stage.appendChild(f);
+                if (poster) poster.style.display = "none";
+            }
+            $("playBtn").addEventListener("click", launchGame);
+
+            /* ---- Tela cheia ---- */
+            $("fsBtn").addEventListener("click", () => {
+                const el = stage;
+                const req = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+                if (req) req.call(el).catch(() => toast("Não foi possível abrir em tela cheia."));
+                else toast("Seu navegador não suporta tela cheia aqui.");
+            });
+
+            /* ---- Toast ---- */
+            let toastTimer = null;
+            function toast(msg) {
+                const t = $("toast");
+                t.textContent = msg;
+                t.classList.add("show");
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => t.classList.remove("show"), 3200);
+            }
+
+            /* Se já houver URL configurada, deixa o cartaz convidativo */
+            if (GAME_URL && posterMsg) {
+                posterMsg.textContent = "Toque no play para começar a limpar a cidade.";
+                const badge = document.querySelector(".badge-dev"); if (badge) badge.style.display = "none";
+            }
+        })();
+    </script>
+</body>
+
+</html>
